@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,6 +32,14 @@ public class AnimeActivity extends AppCompatActivity {
         arrayList = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
+
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3){
+            Object o = listView.getItemAtPosition(position);
+            }
+        });
     }
 
 
