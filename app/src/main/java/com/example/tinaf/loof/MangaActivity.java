@@ -33,6 +33,7 @@ public class MangaActivity extends AppCompatActivity {
         arrayList = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
     }
     public void onClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
