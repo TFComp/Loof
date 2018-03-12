@@ -17,7 +17,7 @@
         android:scrollbars="vertical" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvShowsList"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:layout_below="@id/editName"
+        android:layout_below="@id/name"
         android:text="Description" />
 
     <EditText
@@ -48,7 +48,7 @@
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/episode"
-        android:onClick="onClick"
+        android:onClick="onAddClick"
         android:text="Add"  />
 
     <Button
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/episode"
         android:layout_toRightOf="@id/addTVShows"
-        android:onClick="onClick"
+        android:onClick="onUpdateClick"
         android:text="Update" />
 
     <Button

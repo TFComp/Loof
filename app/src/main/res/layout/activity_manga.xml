@@ -48,7 +48,7 @@
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/chapter"
-        android:onClick="onClick"
+        android:onClick="onAddClick"
         android:text="Add" />
 
     <Button
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/addManga"
         android:layout_below="@id/chapter"
-        android:onClick="onClick"
+        android:onClick="onUpdateClick"
         android:text="Update" />
 
     <Button
