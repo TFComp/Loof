@@ -5,5 +5,13 @@ package com.example.tinaf.loof;
  */
 
 public class TVShows extends Base{
-    int episode;
+    private int episode;
+
+    public int getEpisode(){
+        return this.episode;
+    }
+
+    public void setEpisode(int episode){
+        this.episode = episode;
+    }
 }

@@ -5,5 +5,13 @@ package com.example.tinaf.loof;
  */
 
 public class Movies extends Base{
-    int time;
+    private String time;
+
+    public String getTime(){
+        return this.time;
+    }
+
+    public void setTime(String time){
+        this.time = time;
+    }
 }

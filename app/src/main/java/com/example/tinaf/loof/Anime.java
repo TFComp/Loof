@@ -7,5 +7,13 @@ import java.util.jar.Attributes;
  */
 
 public class Anime extends Base {
-    int episode;
+    private int episode;
+
+    public int getEpisode(){
+        return this.episode;
+    }
+
+    public void setEpisode(int episode){
+        this.episode = episode;
+    }
 }

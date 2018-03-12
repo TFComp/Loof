@@ -5,5 +5,13 @@ package com.example.tinaf.loof;
  */
 
 public class Manga extends Base{
-    int chapter;
+    private int chapter;
+
+    public int getChapter(){
+        return this.chapter;
+    }
+
+    public void setChapter(int chapter){
+        this.chapter = chapter;
+    }
 }
