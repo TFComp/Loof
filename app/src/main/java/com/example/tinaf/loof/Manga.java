@@ -14,4 +14,9 @@ public class Manga extends Base{
     public void setChapter(int chapter){
         this.chapter = chapter;
     }
+
+    public Manga(String name, String description, int chapter){
+        super(name, description);
+        this.chapter = chapter;
+    }
 }

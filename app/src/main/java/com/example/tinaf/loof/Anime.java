@@ -16,4 +16,9 @@ public class Anime extends Base {
     public void setEpisode(int episode){
         this.episode = episode;
     }
+
+    public Anime(String name, String description, int epsiode){
+        super(name, description);
+        this.episode = episode;
+    }
 }

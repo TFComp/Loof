@@ -14,4 +14,9 @@ public class Movies extends Base{
     public void setTime(String time){
         this.time = time;
     }
+
+    public Movies(String name, String description, String time){
+        super(name, description);
+        this.time = time;
+    }
 }

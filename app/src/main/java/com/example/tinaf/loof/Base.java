@@ -8,6 +8,11 @@ public class Base {
     private String name;
     private String description;
 
+    public Base(String name, String description){
+        this.setName(name);
+        this.setDescription(description);
+    }
+
     public String getName(){
         return this.name;
     }
@@ -19,7 +24,7 @@ public class Base {
     public String getDescription(){
         return this.description;
     }
-    
+
     public void setDescription(String description){
         this.description = description;
     }

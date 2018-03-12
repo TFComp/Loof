@@ -14,4 +14,9 @@ public class Books extends Base {
     public void setPage(int page){
         this.page = page;
     }
+
+    public Books(String name, String description, int page){
+        super(name, description);
+        this.page = page;
+    }
 }

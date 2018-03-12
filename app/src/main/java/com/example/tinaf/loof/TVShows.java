@@ -14,4 +14,9 @@ public class TVShows extends Base{
     public void setEpisode(int episode){
         this.episode = episode;
     }
+
+    public TVShows(String name, String description, int episode){
+        super(name, description);
+        this.episode = episode;
+    }
 }
