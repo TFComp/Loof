@@ -48,7 +48,7 @@
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/episode"
-        android:onClick="onClick"
+        android:onClick="onAddClick"
         android:text="Add" />
 
     <Button
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/episode"
         android:layout_toRightOf="@id/addAnime"
-        android:onClick="onClick"
+        android:onClick="onUpdateClick"
         android:text="Update" />
 
     <Button
@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/episode"
         android:layout_toRightOf="@id/updateAnime"
+        android:onClick="onDeleteClick"
         android:text="Delete" />
 
 </RelativeLayout>
