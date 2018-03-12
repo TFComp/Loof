@@ -15,9 +15,9 @@ import android.util.SparseBooleanArray;
 
 
 public class AnimeActivity extends AppCompatActivity {
-    ArrayList<String> arrayList;
-    ArrayAdapter<String> adapter;
-    static String[] items;
+    ArrayList<Anime> arrayList;
+    ArrayAdapter<Anime> adapter;
+    static Anime[] items;
     ListView listView;
 
     @Override
@@ -26,11 +26,14 @@ public class AnimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anime);
         this.setTitle("Anime");
         if (items == null) {
-            items = new String[]{"one", "two", "three"};
+            items = new Anime[10];
+            for(int i=0; i<10; i++){
+                items[i]=new Anime("Anime "+i,"Lorem "+i, i);
+            }
         }
         listView = (ListView) findViewById(R.id.animeList);
         arrayList = new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
+        adapter = new ArrayAdapter<Anime>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
@@ -53,7 +56,7 @@ public class AnimeActivity extends AppCompatActivity {
     public void onAddClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String editText = (String) textview.getText().toString();
-        arrayList.add(editText);
+        //arrayList.add(editText);
         adapter.notifyDataSetChanged();
     }
 
@@ -65,7 +68,7 @@ public class AnimeActivity extends AppCompatActivity {
         if (checkedItems != null) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
-                    arrayList.set(checkedItems.keyAt(i), name);
+                    //arrayList.set(checkedItems.keyAt(i), name);
                 }
                 adapter.notifyDataSetChanged();
             }
