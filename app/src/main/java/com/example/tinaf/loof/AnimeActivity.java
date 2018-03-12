@@ -15,9 +15,10 @@ import android.util.SparseBooleanArray;
 
 
 public class AnimeActivity extends AppCompatActivity {
-    ArrayList<Anime> arrayList;
-    ArrayAdapter<Anime> adapter;
-    static Anime[] items;
+    ArrayList<String> arrayList;
+    ArrayAdapter<String> adapter;
+    static String[] items;
+    static Anime[] animeList;
     ListView listView;
 
     @Override
@@ -25,15 +26,17 @@ public class AnimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anime);
         this.setTitle("Anime");
-        if (items == null) {
-            items = new Anime[10];
+        if (animeList == null) {
+            animeList = new Anime[10];
+            items = new String[10];
             for(int i=0; i<10; i++){
-                items[i]=new Anime("Anime "+i,"Lorem "+i, i);
+                animeList[i]=new Anime("Anime "+i,"Lorem "+i, i);
+                items[i] = animeList[i].getName();
             }
         }
         listView = (ListView) findViewById(R.id.animeList);
         arrayList = new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<Anime>(this, R.layout.list_item, R.id.txtitem, arrayList);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
@@ -46,8 +49,12 @@ public class AnimeActivity extends AppCompatActivity {
                 EditText description = (EditText) findViewById(R.id.description);
                 EditText episodNum = (EditText) findViewById(R.id.episode);
                 name.setText(o.toString());
-                description.setText(o.toString());
-                episodNum.setText(o.toString());
+                for(int i = 0; i < 10; i++) {
+                    if (animeList[i].getName() == o.toString()) {
+                        description.setText(animeList[i].getDescription());
+                        episodNum.setText(""+animeList[i].getEpisode());
+                    }
+                }
             }
         });
     }
@@ -56,7 +63,7 @@ public class AnimeActivity extends AppCompatActivity {
     public void onAddClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String editText = (String) textview.getText().toString();
-        //arrayList.add(editText);
+        arrayList.add(editText);
         adapter.notifyDataSetChanged();
     }
 
