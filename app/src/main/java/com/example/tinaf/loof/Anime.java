@@ -17,7 +17,7 @@ public class Anime extends Base {
         this.episode = episode;
     }
 
-    public Anime(String name, String description, int epsiode){
+    public Anime(String name, String description, int episode){
         super(name, description);
         this.episode = episode;
     }

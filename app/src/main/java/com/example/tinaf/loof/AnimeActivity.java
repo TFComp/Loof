@@ -18,7 +18,7 @@ public class AnimeActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
     static String[] items;
-    static Anime[] animeList;
+    static ArrayList<Anime> animeList;
     ListView listView;
 
     @Override
@@ -27,11 +27,11 @@ public class AnimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anime);
         this.setTitle("Anime");
         if (animeList == null) {
-            animeList = new Anime[10];
+            animeList = new ArrayList<Anime>();
             items = new String[10];
             for(int i=0; i<10; i++){
-                animeList[i]=new Anime("Anime "+i,"Lorem "+i, i);
-                items[i] = animeList[i].getName();
+                items[i] = "Anime "+i;
+                animeList.add(new Anime("Anime "+i,"Lorem "+i, i));
             }
         }
         listView = (ListView) findViewById(R.id.animeList);
@@ -49,10 +49,10 @@ public class AnimeActivity extends AppCompatActivity {
                 EditText description = (EditText) findViewById(R.id.description);
                 EditText episodNum = (EditText) findViewById(R.id.episode);
                 name.setText(o.toString());
-                for(int i = 0; i < 10; i++) {
-                    if (animeList[i].getName() == o.toString()) {
-                        description.setText(animeList[i].getDescription());
-                        episodNum.setText(""+animeList[i].getEpisode());
+                for(Anime anime:animeList) {
+                    if (anime.getName().contentEquals(o.toString())) {
+                        description.setText(anime.getDescription());
+                        episodNum.setText(""+anime.getEpisode());
                     }
                 }
             }
@@ -61,21 +61,32 @@ public class AnimeActivity extends AppCompatActivity {
 
 
     public void onAddClick(View view) {
-        EditText textview = (EditText) findViewById(R.id.name);
-        String editText = (String) textview.getText().toString();
-        arrayList.add(editText);
+        EditText nametextview = (EditText) findViewById(R.id.name);
+        String name = (String) nametextview.getText().toString();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.episode);
+        String episode = (String) episidetextview.getText().toString();
+        arrayList.add(name);
+        animeList.add(new Anime(name, description, Integer.parseInt(episode)));
         adapter.notifyDataSetChanged();
     }
 
     public void onUpdateClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String name = (String) textview.getText().toString();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.episode);
+        String episode = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
         if (checkedItems != null) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
-                    //arrayList.set(checkedItems.keyAt(i), name);
+                    arrayList.set(checkedItems.keyAt(i), name);
+                    Anime anime = new Anime(name, description, Integer.parseInt(episode));
+                    animeList.set(checkedItems.keyAt(i), anime);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -93,6 +104,7 @@ public class AnimeActivity extends AppCompatActivity {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.remove(checkedItems.keyAt(i));
+                    animeList.remove(checkedItems.keyAt(i));
                 }
                 adapter.notifyDataSetChanged();
             }
