@@ -35,13 +35,13 @@ public class BooksActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
     public void onClick(View view) {
-        EditText textview = (EditText) findViewById(R.id.editText);
+        EditText textview = (EditText) findViewById(R.id.name);
         String editText = (String) textview.getText().toString();
         arrayList.add(editText);
         adapter.notifyDataSetChanged();
     }
     public void onDeleteClick(View view) {
-        EditText textview = (EditText) findViewById(R.id.editText);
+        EditText textview = (EditText) findViewById(R.id.name);
         String editText = (String) textview.getText().toString();
         //arrayList.add(editText);
         //adapter.notifyDataSetChanged();

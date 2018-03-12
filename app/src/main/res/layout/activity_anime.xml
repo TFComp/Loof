@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,75 +8,64 @@
 
     <ListView
         android:id="@+id/animeList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/addAnime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/animeList"
+        android:ems="10"
+        android:inputType="textLongMessage|textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:ems="10"
+        android:inputType="textLongMessage|textPersonName"
+        android:text="Description" />
+
+    <EditText
+        android:id="@+id/episode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:ems="10"
+        android:inputType="textLongMessage|textPersonName"
+        android:text="Episode" />
 
     <Button
         android:id="@+id/addAnime"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_below="@id/episode"
         android:onClick="onClick"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
+        android:text="Add" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/updateAnime"
+        android:layout_width="88dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:inputType="textLongMessage|textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/addAnime"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/animeList" />
-
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        android:layout_below="@id/episode"
+        android:layout_toRightOf="@id/addAnime"
+        android:onClick="onClick"
+        android:text="Update" />
 
     <Button
         android:id="@+id/deleteAnime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="259dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/addAnime"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_below="@id/episode"
+        android:layout_toRightOf="@id/updateAnime"
+        android:text="Delete" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
