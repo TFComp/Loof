@@ -65,7 +65,7 @@
         android:text="Time: " />
 
     <EditText
-        android:id="@+id/episodeNum"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/description"
@@ -78,7 +78,7 @@
         android:id="@+id/addMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/episodeNum"
+        android:layout_below="@id/time"
         android:onClick="onAddClick"
         android:text="Add" />
 
@@ -86,7 +86,7 @@
         android:id="@+id/updateMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/episodeNum"
+        android:layout_below="@id/time"
         android:layout_toRightOf="@id/addMovies"
         android:onClick="onUpdateClick"
         android:text="Update" />
@@ -95,7 +95,7 @@
         android:id="@+id/deleteMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/episodeNum"
+        android:layout_below="@id/time"
         android:layout_toRightOf="@id/updateMovies"
         android:onClick="onDeleteClick"
         android:text="Delete" />
