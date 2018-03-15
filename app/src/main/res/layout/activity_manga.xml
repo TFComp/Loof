@@ -16,32 +16,62 @@
         android:layout_marginTop="8dp"
         android:scrollbars="vertical" />
 
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mangaList"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Name: " />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mangaList"
+        android:layout_toRightOf="@id/descriptionLabel"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Name" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Description: " />
 
     <EditText
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
+        android:layout_toRightOf="@id/descriptionLabel"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Description" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/episodeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Chapter: " />
 
     <EditText
         android:id="@+id/chapter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/description"
+        android:layout_toRightOf="@id/descriptionLabel"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Chapter" />
+        android:text="" />
 
     <Button
         android:id="@+id/addManga"

@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import android.util.SparseBooleanArray;
 
+
 public class MoviesActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
     static String[] items;
+    static ArrayList<Movies> moviesList;
     ListView listView;
 
     @Override
@@ -24,8 +26,13 @@ public class MoviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         this.setTitle("Movies");
-        if (items == null) {
-            items = new String[]{"one", "two", "three"};
+        if (moviesList == null) {
+            moviesList = new ArrayList<Movies>();
+            items = new String[10];
+            for(int i=0; i<10; i++){
+                items[i] = "Movies "+i;
+                moviesList.add(new Movies("Movies "+i,"Lorem "+i, Integer.toString(i)));
+            }
         }
         listView = (ListView) findViewById(R.id.moviesList);
         arrayList = new ArrayList<>(Arrays.asList(items));
@@ -40,19 +47,50 @@ public class MoviesActivity extends AppCompatActivity {
                 Object o = listView.getItemAtPosition(position);
                 EditText name = (EditText) findViewById(R.id.name);
                 EditText description = (EditText) findViewById(R.id.description);
-                EditText episodNum = (EditText) findViewById(R.id.episodeNum);
+                EditText page = (EditText) findViewById(R.id.time);
                 name.setText(o.toString());
-                description.setText(o.toString());
-                episodNum.setText(o.toString());
+                for(Movies movies:moviesList) {
+                    if (movies.getName().contentEquals(o.toString())) {
+                        description.setText(movies.getDescription());
+                        page.setText(""+movies.getTime());
+                    }
+                }
             }
         });
     }
 
+
     public void onAddClick(View view) {
+        EditText nametextview = (EditText) findViewById(R.id.name);
+        String name = (String) nametextview.getText().toString();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.time);
+        String time = (String) episidetextview.getText().toString();
+        arrayList.add(name);
+        moviesList.add(new Movies(name, description, time));
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onUpdateClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String name = (String) textview.getText().toString();
-        arrayList.add(name);
-        adapter.notifyDataSetChanged();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.time);
+        String time = (String) episidetextview.getText().toString();
+
+        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+        if (checkedItems != null) {
+            for (int i = 0; i < checkedItems.size(); ++i) {
+                if (checkedItems.valueAt(i)) {
+                    arrayList.set(checkedItems.keyAt(i), name);
+                    Movies movies = new Movies(name, description, time);
+                    moviesList.set(checkedItems.keyAt(i), movies);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     public void onDeleteClick(View view) {
@@ -66,21 +104,7 @@ public class MoviesActivity extends AppCompatActivity {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.remove(checkedItems.keyAt(i));
-                }
-                adapter.notifyDataSetChanged();
-            }
-        }
-    }
-
-    public void onUpdateClick(View view) {
-        EditText textview = (EditText) findViewById(R.id.name);
-        String name = (String) textview.getText().toString();
-
-        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
-            for (int i = 0; i < checkedItems.size(); ++i) {
-                if (checkedItems.valueAt(i)) {
-                    arrayList.set(checkedItems.keyAt(i), name);
+                    moviesList.remove(checkedItems.keyAt(i));
                 }
                 adapter.notifyDataSetChanged();
             }

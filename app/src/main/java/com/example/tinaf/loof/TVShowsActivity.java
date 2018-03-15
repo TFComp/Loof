@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import android.util.SparseBooleanArray;
 
+
 public class TVShowsActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
     static String[] items;
+    static ArrayList<TVShows> tvShowsList;
     ListView listView;
 
     @Override
@@ -24,8 +26,13 @@ public class TVShowsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tvshows);
         this.setTitle("TV Shows");
-        if (items == null) {
-            items = new String[]{"one", "two", "three"};
+        if (tvShowsList == null) {
+            tvShowsList = new ArrayList<TVShows>();
+            items = new String[10];
+            for(int i=0; i<10; i++){
+                items[i] = "TV Shows "+i;
+                tvShowsList.add(new TVShows("TV Shows "+i,"Lorem "+i, i));
+            }
         }
         listView = (ListView) findViewById(R.id.tvShowsList);
         arrayList = new ArrayList<>(Arrays.asList(items));
@@ -40,30 +47,46 @@ public class TVShowsActivity extends AppCompatActivity {
                 Object o = listView.getItemAtPosition(position);
                 EditText name = (EditText) findViewById(R.id.name);
                 EditText description = (EditText) findViewById(R.id.description);
-                EditText episodNum = (EditText) findViewById(R.id.episode);
+                EditText page = (EditText) findViewById(R.id.episode);
                 name.setText(o.toString());
-                description.setText(o.toString());
-                episodNum.setText(o.toString());
+                for(TVShows tvShows:tvShowsList) {
+                    if (tvShows.getName().contentEquals(o.toString())) {
+                        description.setText(tvShows.getDescription());
+                        page.setText(""+tvShows.getEpisode());
+                    }
+                }
             }
         });
     }
 
+
     public void onAddClick(View view) {
-        EditText textview = (EditText) findViewById(R.id.name);
-        String name = (String) textview.getText().toString();
+        EditText nametextview = (EditText) findViewById(R.id.name);
+        String name = (String) nametextview.getText().toString();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.episode);
+        String episode = (String) episidetextview.getText().toString();
         arrayList.add(name);
+        tvShowsList.add(new TVShows(name, description, Integer.parseInt(episode)));
         adapter.notifyDataSetChanged();
     }
 
     public void onUpdateClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String name = (String) textview.getText().toString();
+        EditText descriptiontextview = (EditText) findViewById(R.id.description);
+        String description = (String) descriptiontextview.getText().toString();
+        EditText episidetextview = (EditText) findViewById(R.id.episode);
+        String episode = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
         if (checkedItems != null) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.set(checkedItems.keyAt(i), name);
+                    TVShows tvshows = new TVShows(name, description, Integer.parseInt(episode));
+                    tvShowsList.set(checkedItems.keyAt(i), tvshows);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -81,6 +104,7 @@ public class TVShowsActivity extends AppCompatActivity {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.remove(checkedItems.keyAt(i));
+                    tvShowsList.remove(checkedItems.keyAt(i));
                 }
                 adapter.notifyDataSetChanged();
             }

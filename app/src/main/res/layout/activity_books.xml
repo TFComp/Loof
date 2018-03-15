@@ -16,32 +16,62 @@
         android:layout_marginTop="8dp"
         android:scrollbars="vertical" />
 
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/booksList"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Name: " />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/booksList"
+        android:layout_toRightOf="@id/nameLabel"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Name" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Description: " />
 
     <EditText
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/descriptionLabel"
         android:layout_below="@id/name"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Description" />
+        android:text="" />
+
+    <TextView
+        android:id="@+id/pageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text="Page: " />
 
     <EditText
         android:id="@+id/page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/pageLabel"
         android:layout_below="@id/description"
         android:ems="10"
         android:inputType="textLongMessage|textPersonName"
-        android:text="Page" />
+        android:text="" />
 
     <Button
         android:id="@+id/addBooks"
@@ -57,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/addBooks"
         android:layout_below="@id/page"
-        android:onClick="onUpdateClick"
+        android:onClick="onAddClick"
         android:text="Update" />
 
     <Button
