@@ -10,10 +10,20 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.util.SparseBooleanArray;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 
 public class AnimeActivity extends AppCompatActivity {
@@ -22,20 +32,14 @@ public class AnimeActivity extends AppCompatActivity {
     static String[] items;
     static ArrayList<Anime> animeList;
     ListView listView;
+    String fileName = "anime.xml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anime);
         this.setTitle("Anime");
-        if (animeList == null) {
-            animeList = new ArrayList<Anime>();
-            items = new String[10];
-            for(int i=0; i<10; i++){
-                items[i] = "Anime "+i;
-                animeList.add(new Anime("Anime "+i,"Lorem "+i, i));
-            }
-        }
+        this.ReadFile();
         listView = (ListView) findViewById(R.id.animeList);
         arrayList = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
@@ -115,7 +119,6 @@ public class AnimeActivity extends AppCompatActivity {
     }
 
     public void SaveFile(){
-        String fileName = "anime.xml";
         String fileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
         fileContents += "<animes>";
         for (int i = 0; i < animeList.size(); i++){
@@ -131,5 +134,38 @@ public class AnimeActivity extends AppCompatActivity {
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void ReadFile(){
+        try{
+            InputStream inputStream = getAssets().open(fileName);
+
+            DocumentBuilderFactory docbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docbFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(inputStream);
+
+            NodeList nodeList = doc.getElementsByTagName("anime");
+
+            if (animeList == null) {
+                animeList = new ArrayList<Anime>();
+            }
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element =(Element) node;
+                    animeList.add(new Anime(getValue("name",element),
+                            getValue("description", element),
+                            Integer.parseInt(getValue("episode", element))));
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private String getValue(String tag, Element element){
+        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node = nodeList.item(0);
+        return node.getNodeValue();
     }
 }
