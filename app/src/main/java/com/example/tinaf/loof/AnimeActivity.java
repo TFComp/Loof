@@ -1,5 +1,6 @@
 package com.example.tinaf.loof;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.util.SparseBooleanArray;
@@ -108,6 +110,26 @@ public class AnimeActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
+        }
+        SaveFile();
+    }
+
+    public void SaveFile(){
+        String fileName = "anime.xml";
+        String fileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+        fileContents += "<animes>";
+        for (int i = 0; i < animeList.size(); i++){
+            fileContents += animeList.get(i).toXml();
+        }
+        fileContents += "</animes>";
+        FileOutputStream outputStream;
+
+        try{
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

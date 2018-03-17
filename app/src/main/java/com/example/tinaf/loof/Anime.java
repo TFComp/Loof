@@ -21,4 +21,12 @@ public class Anime extends Base {
         super(name, description);
         this.episode = episode;
     }
+
+    public String toXml() {
+        String xml = "<anime> <name>" + this.getName() +
+                "</name> <description>" + this.getDescription() +
+                "</description> <episode>" + this.getEpisode() +
+                "</episode> </anime>";
+        return xml;
+    }
 }
