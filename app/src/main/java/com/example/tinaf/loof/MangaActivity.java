@@ -104,6 +104,7 @@ public class MangaActivity extends AppCompatActivity {
         SaveFile();
     }
 
+
     public void onDeleteClick(View view) {
         EditText textview = (EditText) findViewById(R.id.name);
         String name = (String) textview.getText().toString();
@@ -111,11 +112,13 @@ public class MangaActivity extends AppCompatActivity {
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
+        if (checkedItems != null && arrayList.size() > 0) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
-                    arrayList.remove(checkedItems.keyAt(i));
-                    mangaList.remove(checkedItems.keyAt(i));
+                    if(checkedItems.keyAt(i) < arrayList.size()) {
+                        arrayList.remove(checkedItems.keyAt(i));
+                        mangaList.remove(checkedItems.keyAt(i));
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
