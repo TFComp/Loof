@@ -19,4 +19,12 @@ public class Manga extends Base{
         super(name, description);
         this.chapter = chapter;
     }
+
+    public String toXml() {
+        String xml = "<mangas> <name>" + this.getName() +
+                "</name> <description>" + this.getDescription() +
+                "</description> <chapter>" + this.getChapter() +
+                "</chapter> </mangas>";
+        return xml;
+    }
 }
