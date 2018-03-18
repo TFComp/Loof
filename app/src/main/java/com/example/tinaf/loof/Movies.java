@@ -19,4 +19,12 @@ public class Movies extends Base{
         super(name, description);
         this.time = time;
     }
+
+    public String toXml() {
+        String xml = "<movies> <name>" + this.getName() +
+                "</name> <description>" + this.getDescription() +
+                "</description> <time>" + this.getTime() +
+                "</time> </movies>";
+        return xml;
+    }
 }

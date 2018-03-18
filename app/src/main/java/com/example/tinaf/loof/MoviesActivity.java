@@ -1,5 +1,6 @@
 package com.example.tinaf.loof;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,33 +10,42 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.util.SparseBooleanArray;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 
 public class MoviesActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    static String[] items;
+    static ArrayList<String> items;
     static ArrayList<Movies> moviesList;
     ListView listView;
+    String fileName = "movies.xml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         this.setTitle("Movies");
-        if (moviesList == null) {
-            moviesList = new ArrayList<Movies>();
-            items = new String[10];
-            for(int i=0; i<10; i++){
-                items[i] = "Movies "+i;
-                moviesList.add(new Movies("Movies "+i,"Lorem "+i, Integer.toString(i)));
-            }
-        }
+        this.setTitle("Manga");
+
+        moviesList = new ArrayList<Movies>();
+        items = new ArrayList<String>();
+
+        this.ReadFile();
         listView = (ListView) findViewById(R.id.moviesList);
-        arrayList = new ArrayList<>(Arrays.asList(items));
+        arrayList = new ArrayList<>(items);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
@@ -70,6 +80,7 @@ public class MoviesActivity extends AppCompatActivity {
         arrayList.add(name);
         moviesList.add(new Movies(name, description, time));
         adapter.notifyDataSetChanged();
+        SaveFile();
     }
 
     public void onUpdateClick(View view) {
@@ -91,6 +102,7 @@ public class MoviesActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
+        SaveFile();
     }
 
     public void onDeleteClick(View view) {
@@ -109,5 +121,55 @@ public class MoviesActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
+        SaveFile();
+    }
+
+    public void SaveFile(){
+        String fileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+        fileContents += "<movie>";
+        for (int i = 0; i < moviesList.size(); i++){
+            fileContents += moviesList.get(i).toXml();
+        }
+        fileContents += "</movie>";
+        FileOutputStream outputStream;
+
+        try{
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void ReadFile(){
+        try{
+            InputStream inputStream = openFileInput(fileName);
+            DocumentBuilderFactory docbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docbFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(inputStream);
+
+            NodeList nodeList = doc.getElementsByTagName("manga");
+
+            for(int i = 0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element =(Element) node;
+                    String name = getValue("name",element);
+                    moviesList.add(new Movies(name,
+                            getValue("description", element),
+                            getValue("time", element)));
+                    items.add(name);
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private String getValue(String tag, Element element){
+        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node = nodeList.item(0);
+        return node.getNodeValue();
     }
 }
