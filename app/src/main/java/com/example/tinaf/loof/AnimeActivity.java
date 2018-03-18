@@ -29,7 +29,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class AnimeActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
-    static String[] items;
+    static ArrayList<String> items;
     static ArrayList<Anime> animeList;
     ListView listView;
     String fileName = "anime.xml";
@@ -39,9 +39,13 @@ public class AnimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anime);
         this.setTitle("Anime");
+
+        animeList = new ArrayList<Anime>();
+        items = new ArrayList<String>();
+
         this.ReadFile();
         listView = (ListView) findViewById(R.id.animeList);
-        arrayList = new ArrayList<>(Arrays.asList(items));
+        arrayList = new ArrayList<>(items);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, arrayList);
         listView.setAdapter(adapter);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
@@ -138,24 +142,22 @@ public class AnimeActivity extends AppCompatActivity {
 
     public void ReadFile(){
         try{
-            InputStream inputStream = getAssets().open(fileName);
-
+            InputStream inputStream = openFileInput(fileName);
             DocumentBuilderFactory docbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docbFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(inputStream);
 
             NodeList nodeList = doc.getElementsByTagName("anime");
 
-            if (animeList == null) {
-                animeList = new ArrayList<Anime>();
-            }
             for(int i = 0; i < nodeList.getLength(); i++){
                 Node node = nodeList.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element =(Element) node;
-                    animeList.add(new Anime(getValue("name",element),
+                    String name = getValue("name",element);
+                    animeList.add(new Anime(name,
                             getValue("description", element),
                             Integer.parseInt(getValue("episode", element))));
+                    items.add(name);
                 }
             }
         } catch (Exception e){
