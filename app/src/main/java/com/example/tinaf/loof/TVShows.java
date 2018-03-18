@@ -19,4 +19,12 @@ public class TVShows extends Base{
         super(name, description);
         this.episode = episode;
     }
+
+    public String toXml() {
+        String xml = "<tvShows> <name>" + this.getName() +
+                "</name> <description>" + this.getDescription() +
+                "</description> <episode>" + this.getEpisode() +
+                "</episode> </tvShows>";
+        return xml;
+    }
 }

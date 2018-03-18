@@ -38,7 +38,7 @@ public class MoviesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         this.setTitle("Movies");
-        this.setTitle("Manga");
+        this.setTitle("tvshows");
 
         moviesList = new ArrayList<Movies>();
         items = new ArrayList<String>();

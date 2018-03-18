@@ -42,6 +42,7 @@ public class FileUtility {
     }
 
     private static FileOutputStream openFileOutput(String fileName, int modePrivate) {
+    return null;
     }
 
     public static void ReadFile(ArrayList<Anime> animeList, ArrayList<String> items, String fileName){
