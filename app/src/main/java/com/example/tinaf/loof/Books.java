@@ -19,4 +19,12 @@ public class Books extends Base {
         super(name, description);
         this.page = page;
     }
+
+    public String toXml() {
+        String xml = "<book> <name>" + this.getName() +
+                "</name> <description>" + this.getDescription() +
+                "</description> <page>" + this.getPage() +
+                "</page> </book>";
+        return xml;
+    }
 }

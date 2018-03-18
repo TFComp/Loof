@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/addBooks"
         android:layout_below="@id/page"
-        android:onClick="onAddClick"
+        android:onClick="onUpdateClick"
         android:text="Update" />
 
     <Button
