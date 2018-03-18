@@ -80,6 +80,7 @@ public class AnimeActivity extends AppCompatActivity {
         arrayList.add(name);
         animeList.add(new Anime(name, description, Integer.parseInt(episode)));
         adapter.notifyDataSetChanged();
+        SaveFile();
     }
 
     public void onUpdateClick(View view) {
@@ -101,6 +102,7 @@ public class AnimeActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
+        SaveFile();
     }
 
     public void onDeleteClick(View view) {
