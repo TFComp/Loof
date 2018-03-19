@@ -92,7 +92,7 @@ public class MoviesActivity extends AppCompatActivity {
         String time = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
+        if (checkedItems != null && arrayList.size() > 0) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.set(checkedItems.keyAt(i), name);

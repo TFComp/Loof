@@ -5,17 +5,17 @@ package com.example.tinaf.loof;
  */
 
 public class Manga extends Base{
-    private int chapter;
+    private String chapter;
 
-    public int getChapter(){
+    public String getChapter(){
         return this.chapter;
     }
 
-    public void setChapter(int chapter){
+    public void setChapter(String chapter){
         this.chapter = chapter;
     }
 
-    public Manga(String name, String description, int chapter){
+    public Manga(String name, String description, String chapter){
         super(name, description);
         this.chapter = chapter;
     }

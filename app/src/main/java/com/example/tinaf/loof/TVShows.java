@@ -5,17 +5,17 @@ package com.example.tinaf.loof;
  */
 
 public class TVShows extends Base{
-    private int episode;
+    private String episode;
 
-    public int getEpisode(){
+    public String getEpisode(){
         return this.episode;
     }
 
-    public void setEpisode(int episode){
+    public void setEpisode(String episode){
         this.episode = episode;
     }
 
-    public TVShows(String name, String description, int episode){
+    public TVShows(String name, String description, String episode){
         super(name, description);
         this.episode = episode;
     }

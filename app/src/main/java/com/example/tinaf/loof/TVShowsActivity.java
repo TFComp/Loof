@@ -62,7 +62,7 @@ public class TVShowsActivity extends AppCompatActivity {
                 for(TVShows tvShows:tvShowsList) {
                     if (tvShows.getName().contentEquals(o.toString())) {
                         description.setText(tvShows.getDescription());
-                        page.setText(""+tvShows.getEpisode());
+                        page.setText(tvShows.getEpisode());
                     }
                 }
             }
@@ -78,7 +78,7 @@ public class TVShowsActivity extends AppCompatActivity {
         EditText episidetextview = (EditText) findViewById(R.id.episode);
         String episode = (String) episidetextview.getText().toString();
         arrayList.add(name);
-        tvShowsList.add(new TVShows(name, description, Integer.parseInt(episode)));
+        tvShowsList.add(new TVShows(name, description, episode));
         adapter.notifyDataSetChanged();
         SaveFile();
     }
@@ -92,11 +92,11 @@ public class TVShowsActivity extends AppCompatActivity {
         String episode = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
+        if (checkedItems != null && arrayList.size() > 0) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.set(checkedItems.keyAt(i), name);
-                    TVShows tvshows = new TVShows(name, description, Integer.parseInt(episode));
+                    TVShows tvshows = new TVShows(name, description, episode);
                     tvShowsList.set(checkedItems.keyAt(i), tvshows);
                 }
                 adapter.notifyDataSetChanged();
@@ -160,7 +160,7 @@ public class TVShowsActivity extends AppCompatActivity {
                     String name = getValue("name",element);
                     tvShowsList.add(new TVShows(name,
                             getValue("description", element),
-                            Integer.parseInt(getValue("episode", element))));
+                            getValue("episode", element)));
                     items.add(name);
                 }
             }

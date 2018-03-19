@@ -61,7 +61,7 @@ public class MangaActivity extends AppCompatActivity {
                 for(Manga manga:mangaList) {
                     if (manga.getName().contentEquals(o.toString())) {
                         description.setText(manga.getDescription());
-                        page.setText(""+manga.getChapter());
+                        page.setText(manga.getChapter());
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class MangaActivity extends AppCompatActivity {
         EditText episidetextview = (EditText) findViewById(R.id.chapter);
         String chapter = (String) episidetextview.getText().toString();
         arrayList.add(name);
-        mangaList.add(new Manga(name, description, Integer.parseInt(chapter)));
+        mangaList.add(new Manga(name, description, chapter));
         adapter.notifyDataSetChanged();
         SaveFile();
     }
@@ -91,11 +91,11 @@ public class MangaActivity extends AppCompatActivity {
         String chapter = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
+        if (checkedItems != null && arrayList.size() > 0) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.set(checkedItems.keyAt(i), name);
-                    Manga manga = new Manga(name, description, Integer.parseInt(chapter));
+                    Manga manga = new Manga(name, description, chapter);
                     mangaList.set(checkedItems.keyAt(i), manga);
                 }
                 adapter.notifyDataSetChanged();
@@ -160,7 +160,7 @@ public class MangaActivity extends AppCompatActivity {
                     String name = getValue("name",element);
                     mangaList.add(new Manga(name,
                             getValue("description", element),
-                            Integer.parseInt(getValue("chapter", element))));
+                            getValue("chapter", element)));
                     items.add(name);
                 }
             }

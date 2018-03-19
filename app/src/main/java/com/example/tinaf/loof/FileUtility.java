@@ -62,7 +62,7 @@ public class FileUtility {
                     String name = getValue("name",element);
                     animeList.add(new Anime(name,
                             getValue("description", element),
-                            Integer.parseInt(getValue("episode", element))));
+                            getValue("episode", element)));
                     items.add(name);
                 }
             }

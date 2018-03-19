@@ -61,7 +61,7 @@ public class BooksActivity extends AppCompatActivity {
                 for(Books books:booksList) {
                     if (books.getName().contentEquals(o.toString())) {
                         description.setText(books.getDescription());
-                        page.setText(""+books.getPage());
+                        page.setText(books.getPage());
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class BooksActivity extends AppCompatActivity {
         EditText episidetextview = (EditText) findViewById(R.id.page);
         String page = (String) episidetextview.getText().toString();
         arrayList.add(name);
-        booksList.add(new Books(name, description, Integer.parseInt(page)));
+        booksList.add(new Books(name, description, page));
         adapter.notifyDataSetChanged();
         SaveFile();
     }
@@ -91,11 +91,11 @@ public class BooksActivity extends AppCompatActivity {
         String page = (String) episidetextview.getText().toString();
 
         SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        if (checkedItems != null) {
+        if (checkedItems != null && arrayList.size() > 0) {
             for (int i = 0; i < checkedItems.size(); ++i) {
                 if (checkedItems.valueAt(i)) {
                     arrayList.set(checkedItems.keyAt(i), name);
-                    Books books = new Books(name, description, Integer.parseInt(page));
+                    Books books = new Books(name, description, page);
                     booksList.set(checkedItems.keyAt(i), books);
                 }
                 adapter.notifyDataSetChanged();
@@ -159,7 +159,7 @@ public class BooksActivity extends AppCompatActivity {
                     String name = getValue("name",element);
                     booksList.add(new Books(name,
                             getValue("description", element),
-                            Integer.parseInt(getValue("page", element))));
+                            getValue("page", element)));
                     items.add(name);
                 }
             }

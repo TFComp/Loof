@@ -18,7 +18,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="This application is used for keeping a record of your ongoing activities (anime, manga, TV shows, movies, books). Please enter only integers when filling in episode, chapter, and page numbers."
+        android:text="This application is used for keeping a record of your ongoing activities (anime, manga, TV shows, movies, books)."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

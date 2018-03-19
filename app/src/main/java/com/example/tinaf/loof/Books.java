@@ -5,17 +5,17 @@ package com.example.tinaf.loof;
  */
 
 public class Books extends Base {
-    private int page;
+    private String page;
 
-    public int getPage(){
+    public String getPage(){
         return this.page;
     }
 
-    public void setPage(int page){
+    public void setPage(String page){
         this.page = page;
     }
 
-    public Books(String name, String description, int page){
+    public Books(String name, String description, String page){
         super(name, description);
         this.page = page;
     }
